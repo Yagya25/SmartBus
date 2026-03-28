@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #0f1419;
+  --color-navy-800: #141a23;
+  --color-navy-700: #1a1f2e;
+  --color-navy-600: #222940;
+  --color-navy-500: #2a3352;
+  --color-cyan-400: #00D9FF;
+  --color-cyan-500: #00b8d9;
+  --color-cyan-600: #0097b2;
+  --color-accent-orange: #ff9500;
+  --color-accent-green: #00d84c;
+  --color-text-secondary: #7a9aaa;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-navy-900);
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animated gradient text */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    #00D9FF 0%,
+    #7c3aed 25%,
+    #ec4899 50%,
+    #00D9FF 75%,
+    #7c3aed 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Flat Card (Replacing glassmorphism for solid flat design) */
+.glass-card {
+  background: var(--color-navy-700);
+  border: 1px solid #1a3a4a;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+.glass-card:hover {
+  background: #202638; /* Slight brightness increase */
+  border-color: #00D9FF;
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.1);
+  transform: none; /* Flat design, no lift */
+}
+
+/* CTA glow */
+.btn-glow {
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+  transform: none;
+}
+
+/* Outline button */
+.btn-outline {
+  border: 1px solid #00D9FF;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(0, 217, 255, 0.05);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.1);
+  transform: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-navy-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-600);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-navy-500);
+}

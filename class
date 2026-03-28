@@ -1,0 +1,106 @@
+import java.util.Scanner;
+
+// Custom Exception for Name
+class InvalidNameException extends Exception {
+    public InvalidNameException(String message) {
+        super(message);
+    }
+}
+
+// Custom Exception for Salary
+class InvalidSalaryException extends Exception {
+    public InvalidSalaryException(String message) {
+        super(message);
+    }
+}
+
+// Employee Class
+class Employee {
+    protected int empid;
+    private String ename;
+    protected double basic;
+
+    public Employee(int empid, String ename, double basic) {
+        this.empid = empid;
+        this.ename = ename;
+        this.basic = basic;
+    }
+
+    public String getEname() {
+        return ename;
+    }
+
+    public double earnings() {
+        double da = 0.80 * basic;
+        double hra = 0.15 * basic;
+        return basic + da + hra;
+    }
+}
+
+// Manager Class
+class Manager extends Employee {
+
+    public Manager(int empid, String ename, double basic) {
+        super(empid, ename, basic);
+    }
+
+    public double bonus() {
+        return 0.20 * earnings();
+    }
+}
+
+// Main Class
+public class MainApp {
+
+    // Name validation
+    public static void validateName(String name) throws InvalidNameException {
+        if (!name.matches("[a-zA-Z]+")) {
+            throw new InvalidNameException("Name must contain only alphabets");
+        }
+    }
+
+    // Salary validation
+    public static void validateSalary(double basic) throws InvalidSalaryException {
+        if (basic < 0) {
+            throw new InvalidSalaryException("Salary cannot be negative");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter empid: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Enter basic salary: ");
+            double basic = sc.nextDouble();
+
+            // Validate input
+            validateName(name);
+            validateSalary(basic);
+
+            // Create object
+            Manager m = new Manager(id, name, basic);
+
+            // Output
+            System.out.println("\nEmployee ID: " + id);
+            System.out.println("Employee Name: " + name.toUpperCase());
+            System.out.println("Earnings: " + m.earnings());
+            System.out.println("Bonus: " + m.bonus());
+
+        } catch (InvalidNameException e) {
+            System.out.println("InvalidNameException: " + e.getMessage());
+        } catch (InvalidSalaryException e) {
+            System.out.println("InvalidSalaryException: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        sc.close();
+    }
+}
